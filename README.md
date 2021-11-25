@@ -11,3 +11,4 @@ A chrome extension to predict star ratings according to the customer's review.
   - load unpacked
   - select the 'client' folder from the cloned repo
   - once installed, head over to google and wait for the magic.
+  - disable the extension to fix google.
