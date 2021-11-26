@@ -1,5 +1,14 @@
-# ratings-predicting-chrome-extension
-A chrome extension to predict star ratings according to the customer's review.
+
+<div style="text-align:center">
+
+<img src="https://github.com/mithu2649/predicto/raw/main/client/logo128.png"/>
+
+# Predicto - Review Rate Predictor<br>
+_A chrome extension to predict star ratings according to the customer's review._
+
+</div>
+
+## Getting Started
 
 ### Clone the repository
 
@@ -12,3 +21,5 @@ A chrome extension to predict star ratings according to the customer's review.
   - select the 'client' folder from the cloned repo
   - once installed, head over to google and wait for the magic.
   - disable the extension to fix google.
+
+### Happy Coding!
