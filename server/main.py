@@ -17,13 +17,13 @@ import matplotlib.pyplot as plt
 # getting the testing and traning datasets
 def getLabelsAndTexts(file):
   tsv_data = pd.read_csv(file, delimiter='\t', error_bad_lines=False)
-  # print(tsv_data['star_rating'])
   labels = []
   texts = []
   for rating in tsv_data['star_rating']:
     labels.append(int(rating))
   for review in tsv_data['review_body']:
     texts.append(review)
+  
   # removing texts which are not strings
   count = 0
   for text in texts:
@@ -40,8 +40,7 @@ test_labels, test_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv
 print(train_labels[0])
 print(train_texts[0])
 
-# removeErrorTexts(texts)
-
+# pre-processing the text
 non_alphanum = re.compile(r'[\W]')
 non_ascii = re.compile(r'[^a-z0-1]\s')
 def process_texts(texts):
