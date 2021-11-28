@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 
 # nltk.download('punkt')
 
+# getting the testing and traning datasets
 def getLabelsAndTexts(file):
   tsv_data = pd.read_csv(file, delimiter='\t', error_bad_lines=False)
   # print(tsv_data['star_rating'])
@@ -29,4 +30,26 @@ train_labels, train_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.t
 test_labels, test_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv")
 
 print(train_labels[0])
+print(train_texts[0])
+
+# pre-processing the texts
+non_alphanum = re.compile(r'[\W]')
+non_ascii = re.compile(r'[^a-z0-1]\s')
+def process_texts(texts):
+  normal_texts = []
+  count = 1
+  for text in texts:
+    print(type(text))
+    print(text)
+    print(count)
+    lower = text.lower()
+    no_punctn = non_alphanum.sub(r' ', lower)
+    no_non_ascii = non_ascii.sub(r'', no_punctn)
+    normal_texts.append(no_non_ascii)
+    count += 1
+  return normal_texts
+
+train_texts = process_texts(train_texts)
+test_texts = process_texts(test_texts)
+
 print(train_texts[0])
