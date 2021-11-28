@@ -24,6 +24,14 @@ def getLabelsAndTexts(file):
     labels.append(int(rating))
   for review in tsv_data['review_body']:
     texts.append(review)
+  # removing texts which are not strings
+  count = 0
+  for text in texts:
+    if type(text) != str:
+      del texts[count]
+      del labels[count]
+    count += 1
+    
   return np.array(labels), texts
 
 train_labels, train_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv")
@@ -32,24 +40,22 @@ test_labels, test_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv
 print(train_labels[0])
 print(train_texts[0])
 
-# pre-processing the texts
+# removeErrorTexts(texts)
+
 non_alphanum = re.compile(r'[\W]')
 non_ascii = re.compile(r'[^a-z0-1]\s')
 def process_texts(texts):
   normal_texts = []
-  count = 1
   for text in texts:
-    print(type(text))
-    print(text)
-    print(count)
     lower = text.lower()
     no_punctn = non_alphanum.sub(r' ', lower)
     no_non_ascii = non_ascii.sub(r'', no_punctn)
     normal_texts.append(no_non_ascii)
-    count += 1
   return normal_texts
 
 train_texts = process_texts(train_texts)
 test_texts = process_texts(test_texts)
 
 print(train_texts[0])
+
+# convert the data in countable vector form
