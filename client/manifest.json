@@ -20,7 +20,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.google.com/*"
+                "https://www.flipkart.com/*"
             ],
             "js": [
                 "content.js",
@@ -35,6 +35,6 @@
     ],
     "permissions": [
         "tabs",
-        "https://www.google.com/*"
+        "https://www.flipkart.com/*"
     ]
 }
