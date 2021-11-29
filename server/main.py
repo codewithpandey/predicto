@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 # from tensorflow.keras.preprocessing import Tokenizer, text_to_word_sequence
 # from tensorflow.preprocessing.sequence import pad_sequence
 # from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
+from sklearn.feature_extraction.text import CountVectorizer
 
 
 # nltk.download('punkt')
@@ -37,8 +38,8 @@ def getLabelsAndTexts(file):
 train_labels, train_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv")
 test_labels, test_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv")
 
-print(train_labels[0])
-print(train_texts[0])
+# print(train_labels[0])
+# print(train_texts[0])
 
 # pre-processing the text
 non_alphanum = re.compile(r'[\W]')
@@ -55,6 +56,13 @@ def process_texts(texts):
 train_texts = process_texts(train_texts)
 test_texts = process_texts(test_texts)
 
-print(train_texts[0])
+# print(train_texts[0])
 
 # convert the data in countable vector form
+
+cvec = CountVectorizer(binary=True)
+cvec.fit(train_texts)
+X = cvec.transform(train_texts)
+X_test = cvec.transform(test_texts)
+
+print(X_test)
