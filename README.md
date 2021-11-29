@@ -5,6 +5,7 @@
 <img src="https://github.com/mithu2649/predicto/raw/main/client/resources/images/logo48.png"/>
 <img src="https://github.com/mithu2649/predicto/raw/main/client/resources/images/logo48-half.png"/>
 <img src="https://github.com/mithu2649/predicto/raw/main/client/resources/images/logo48-empty.png"/>
+<img src="https://github.com/mithu2649/predicto/raw/main/client/resources/images/logo48-empty.png"/>
 
 # Predicto - Review Rate Predictor<br>
 _A chrome extension to predict star ratings according to the customer's review._

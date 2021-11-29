@@ -34,7 +34,7 @@ window.addEventListener('DOMFocusIn', function () {
     }
 
     function updateRating(digit) {
-        //early returns, fail checks.
+        
         if (digit == undefined || digit == null) return;
         if (digit < 1 || digit > 5)   return console.error('rating not within the range 1 to 5');
         if (!Number.isInteger(digit)) return console.error(`rating must be an Integer, recieved ${typeof digit}!`)
