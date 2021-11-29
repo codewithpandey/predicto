@@ -1,0 +1,23 @@
+._14YOVU{
+    background-color: black !important;
+    color: #fff;
+    position: relative;
+}
+
+.SFueOp ._14YOVU {
+    height: 150px !important;
+}
+._14YOVU::after {
+    content: "keep your eyes on me as you type -  try words like, awesome, good, bad, decent";
+    display: inline-block;
+    font-size: 15px;
+    color: gray;
+    position: absolute;
+    bottom: 18px;
+    left: 15px;
+
+}
+._2sxtk- span {
+    color: #fff !important;
+}
+

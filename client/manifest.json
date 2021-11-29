@@ -4,12 +4,12 @@
     "version": "1.0.0",
     "description": "A chrome extension to do a sentiment analysis of a rating on Shopping Websites!",
     "icons": {
-        "128": "logo128.png",
-        "48" : "logo48.png",
-        "16" : "logo16.png"
+        "128": "resources/images/logo128.png",
+        "48" : "resources/images/logo48.png",
+        "16" : "resources/images/logo16.png"
     },
     "page_action": {
-        "default_icon"  : "logo16.png",
+        "default_icon"  : "resources/images/logo16.png",
         "default_popup" : "popup.html",
         "default_title" : "Rate Prediction"
     },
@@ -20,14 +20,14 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.google.com/*"
+                "https://www.flipkart.com/*"
             ],
             "js": [
                 "content.js",
-                "jquery.min.js"
+                "resources/js/jquery.min.js"
             ],
             "css": [
-                "content.css"
+                "resources/css/content.css"
             ],
             "run_at": "document_idle",
             "all_frames": true
@@ -35,6 +35,6 @@
     ],
     "permissions": [
         "tabs",
-        "https://www.google.com/*"
+        "https://www.flipkart.com/*"
     ]
 }
