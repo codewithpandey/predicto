@@ -1,10 +1,7 @@
+loadCount = 0;
 chrome.runtime.sendMessage({ todo: "showPageAction" });
 
-loadCount = 0;
-
 window.addEventListener('DOMFocusIn', function () {
-
-   
 
     // console.clear();
 
@@ -25,10 +22,10 @@ window.addEventListener('DOMFocusIn', function () {
         if (review.includes('awesome')) updateRating(5);
         if (review.includes('amazing')) updateRating(5);
         if (review.includes('decent')) updateRating(3);
-        if (review.includes('great')) updateRating(4);
         if (review.includes('worst')) updateRating(1);
+        if (review.includes('great')) updateRating(4);
         if (review.includes('cool')) updateRating(3);
-        if (review.includes('nice')) updateRating(4);
+        if (review.includes('nice')) updateRating(2);
         if (review.includes('bad')) updateRating(1);
 
     });
@@ -37,16 +34,34 @@ window.addEventListener('DOMFocusIn', function () {
         return this.split(' ').includes(keyword) ? true : false;
     }
 
-    function updateRating(digit) {
+    function updateRating(rating) {
 
-        if (digit == undefined || digit == null) return;
-        if (digit < 1 || digit > 5) return console.error('rating not within the range 1 to 5');
-        if (!Number.isInteger(digit)) return console.error(`rating must be an Integer, recieved ${typeof digit}!`)
+        if (
+            rating == undefined ||
+            rating == null ||
+            rating < 1 ||
+            rating > 5 ||
+            !Number.isInteger(rating)
+        ) return;
 
-        stars[digit].click();
+        stars[rating].click();
+        updateProgressBar(rating);
+        updateProgressBarMessage(rating)
+
     }
 
-    if(loadCount == 0) {
+    function updateProgressBarMessage(rating) {
+        let messageContainer = document.querySelector('.messageContainer');
+        messageContainer.innerHTML = `Your rating is ${rating * 20}% positive. 👍`;
+    }
+
+    function updateProgressBar(rating) {
+        let progressBar = document.querySelector('.progressBar');
+        progressBar.style.width = `${rating * 20}%`;
+    }
+
+
+    if (loadCount == 0) {
 
         ratingContainer = document.querySelector('._14YOVU');
 
@@ -58,19 +73,15 @@ window.addEventListener('DOMFocusIn', function () {
         progressBar.setAttribute('data-progress', '80');
         progressBar.setAttribute('class', 'progressBar');
 
-        ratingContainer.appendChild(progressBarContainer);
-        document.querySelector('.progressBarContainer').appendChild(progressBar);
-
         messageContainer = document.createElement('span');
         messageContainer.setAttribute('class', 'messageContainer');
-        messageContainer.innerHTML = 'Your rating is 80% positive. 👍';
+        messageContainer.innerHTML = `Start typing to see analysis of your review.`;
+
+        ratingContainer.appendChild(progressBarContainer);
+        progressBarContainer.appendChild(progressBar);
         ratingContainer.appendChild(messageContainer);
-
-
-
 
         loadCount++;
     }
-   
 
 }, false);
