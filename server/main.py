@@ -76,7 +76,7 @@ X_test = cvec.transform(test_texts)
 
 X_train, X_val, Y_train, Y_val = train_test_split(X, train_labels, train_size = 0.75)
 
-# training the data using LogisticRegression
+# training the data using LogisticRegression (Will use Neural Networks Later)
 
 for c in [0.01, 0.05, 0.25, 0.5, 1]:
   LR = LogisticRegression(C=c)
