@@ -9,8 +9,10 @@ import matplotlib.pyplot as plt
 # from tensorflow.python.keras import models, layers, optimizers
 # from tensorflow.keras.preprocessing import Tokenizer, text_to_word_sequence
 # from tensorflow.preprocessing.sequence import pad_sequence
-# from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
+from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 
 # nltk.download('punkt')
@@ -41,6 +43,9 @@ test_labels, test_texts = getLabelsAndTexts("amazon_reviews_us_Watches_v1_00.tsv
 # print(train_labels[0])
 # print(train_texts[0])
 
+train_labels = train_labels[0:500]
+train_texts = train_texts[0:500]
+
 # pre-processing the text
 non_alphanum = re.compile(r'[\W]')
 non_ascii = re.compile(r'[^a-z0-1]\s')
@@ -65,4 +70,17 @@ cvec.fit(train_texts)
 X = cvec.transform(train_texts)
 X_test = cvec.transform(test_texts)
 
-print(X_test)
+# print(X_test)
+
+# splitting the training and testing values
+
+X_train, X_val, Y_train, Y_val = train_test_split(X, train_labels, train_size = 0.75)
+
+# training the data using LogisticRegression (Will use Neural Networks Later)
+
+for c in [0.01, 0.05, 0.25, 0.5, 1]:
+  LR = LogisticRegression(C=c)
+  LR.fit(X_train, Y_train)
+  print("Accuracy for C=%s: %s" % (c, accuracy_score(Y_val, LR.predict(X_val))))
+
+print(LR.predict(X_test[1]))
