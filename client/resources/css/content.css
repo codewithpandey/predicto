@@ -1,5 +1,5 @@
 ._14YOVU {
-    background-color: black !important;
+    background-color: rgb(12, 14, 22) !important;
     color: #fff;
     position: relative;
 }
@@ -24,10 +24,10 @@
 }
 
 ._14YOVU::before {
-    content: "keep your eyes on me as you type -  try words like, awesome, good, bad, decent";
+    content: "Hi, I'm Predicto. Write your review below and try including words like awesome, decent, nice, bad, worst etc.";
     display: inline-block;
     font-size: 15px;
-    color: gray;
+    color: rgb(97, 97, 97);
     position: absolute;
     bottom: 18px;
     left: 45px;
@@ -45,7 +45,7 @@
 }
 
 .progressBar {
-    background-color: rgb(63, 226, 63);
+    background-color: #3fe23f;
     height: 8px;
     width: 0%;
     border-radius: 10px;
