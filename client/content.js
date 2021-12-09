@@ -30,6 +30,8 @@ window.addEventListener('DOMFocusIn', function () {
 
     });
 
+
+
     String.prototype.includes = function (keyword) {
         return this.split(' ').includes(keyword) ? true : false;
     }
@@ -51,13 +53,26 @@ window.addEventListener('DOMFocusIn', function () {
     }
 
     function updateProgressBarMessage(rating) {
+
+        let ratingPercentage = rating * 20;
+        let thumb = ratingPercentage < 40 ? '👎' : '👍';
+
+        if(ratingPercentage == 100) thumb = '❤️';
+
         let messageContainer = document.querySelector('.messageContainer');
-        messageContainer.innerHTML = `Your rating is ${rating * 20}% positive. 👍`;
+        messageContainer.innerHTML = `Your rating is ${rating * 20}% positive. ${thumb}`;
     }
 
     function updateProgressBar(rating) {
+        
+        let ratingPercentage = rating * 20;
+
         let progressBar = document.querySelector('.progressBar');
-        progressBar.style.width = `${rating * 20}%`;
+        let progressBarColor = ratingPercentage < 40 ? '#e23f3f' : '#3fe23f';
+
+        progressBar.style.width = `${ratingPercentage}%`;
+        progressBar.style.backgroundColor = progressBarColor;
+
     }
 
 
