@@ -49,7 +49,7 @@ class Model:
             no_punctn = non_alphanum.sub(r' ', lower)
             no_non_ascii = non_ascii.sub(r' ', no_punctn)
             normal_texts.append(no_non_ascii)
-            count += 1
+            count += 1  
         return normal_texts
 
     def train(self):

@@ -1,12 +1,11 @@
 import re
 from flask import Flask, request, jsonify
 import brain.model as model
-# The brain (main.py) file shall be imported here
-# and all the function calls will be made from this file
-# the brain will return the data required back here.
-# the response will be sent back to the client as json.
+
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/')
 def index():
@@ -15,14 +14,12 @@ def index():
 
 @app.route('/getRating')
 def getRating():
-    review = request.args.get('review')
-
-    # brain does the analysis and returns the star rating here
-    # then return the rating in json format along with the review to the client
-    # sample response below.
+    review = str(request.args.get('review'));
     brain = model.Model()
+    
     # brain.train()
     # Absolutely love this watch! Get compliments almost every time I wear it. Dainty.
+    
     rating = brain.predict([review])
 
     response = {
@@ -32,14 +29,11 @@ def getRating():
 
     return jsonify(response)
 
-    # head over to - localhost:5000/getRating?review=hello
-    # and it should return a json representation of the above data.
-
 @app.route('/train')
 def train():
     brain = model.Model()
     brain.train()
-    return "Predicto is an AI based star rating predictor"
+    return "Training has been initiated."
     # I'll add templates and html pages in the next commit :P
 
 @app.route('/predicto')

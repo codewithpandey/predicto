@@ -1,0 +1,11 @@
+Install pipenv on your machine
+   >> pip install pipenv
+
+Setup virtual env and activate it
+    >> pipenv shell
+
+Install all dependencies
+    >> pipenv install
+
+Run the flask app from virtual env
+    >> pipenv run flask run
