@@ -15,41 +15,26 @@ window.addEventListener('DOMFocusIn', function () {
     stars.reverse();
     stars.unshift(0);
 
-    reviewContainer.addEventListener('keyup', function (e) {
+    reviewContainer.addEventListener('focusout', async function (e) {
 
+        //for now we're using the focusout event, because
+        //sending request to the server on every keystroke (keyup event)
+        //results in out of memory error on the server 
+        
         let review = e.target.value;
 
-        // if (review.includes('awesome')) updateRating(5);
-        // if (review.includes('amazing')) updateRating(5);
-        // if (review.includes('decent')) updateRating(3);
-        // if (review.includes('worst')) updateRating(1);
-        // if (review.includes('great')) updateRating(4);
-        // if (review.includes('cool')) updateRating(3);
-        // if (review.includes('nice')) updateRating(2);
-        // if (review.includes('bad')) updateRating(1);
+        console.log('requesting server for rating...');
 
-        // ====================
-        // Create an XMLHttpRequest object
-        const xhttp = new XMLHttpRequest();
+        const baseURL = `http://127.0.0.1:5000`;
+        const endpoint = `${baseURL}/getRating?review=${review}`;
 
-        // Define a callback function
-        xhttp.onload = function() {
-            res = this.getAllResponseHeaders();
-            // updateRating(res.status)
-            alert(res.status)
-
-        }
-
-        // Send a request
-        xhttp.open("GET", "http://127.0.0.1:5000/getRating?review=" + review);
-        var sent = xhttp.send();
-        if(sent){
-            alert("Sent");
-        }
-        // ==================
-
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(response => {
+                updateRating(Number(response.rating));
+                console.log(response);
+            });
     });
-
 
 
     String.prototype.includes = function (keyword) {

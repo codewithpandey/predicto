@@ -2,3 +2,7 @@
 /documentation
 /Rate Prediction - Sentiment Analysis
 /.vscode
+/server/brain/amazon_reviews_us_Watches_v1_00.tsv.gz
+/server/brain/amazon_reviews_us_Watches_v1_00.tsv
+/server/amazon_reviews_us_Watches_v1_00.tsv
+/server/brain/__pycache__
