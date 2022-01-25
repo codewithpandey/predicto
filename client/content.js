@@ -19,14 +19,31 @@ window.addEventListener('DOMFocusIn', function () {
 
         let review = e.target.value;
 
-        if (review.includes('awesome')) updateRating(5);
-        if (review.includes('amazing')) updateRating(5);
-        if (review.includes('decent')) updateRating(3);
-        if (review.includes('worst')) updateRating(1);
-        if (review.includes('great')) updateRating(4);
-        if (review.includes('cool')) updateRating(3);
-        if (review.includes('nice')) updateRating(2);
-        if (review.includes('bad')) updateRating(1);
+        // if (review.includes('awesome')) updateRating(5);
+        // if (review.includes('amazing')) updateRating(5);
+        // if (review.includes('decent')) updateRating(3);
+        // if (review.includes('worst')) updateRating(1);
+        // if (review.includes('great')) updateRating(4);
+        // if (review.includes('cool')) updateRating(3);
+        // if (review.includes('nice')) updateRating(2);
+        // if (review.includes('bad')) updateRating(1);
+        // Create an XMLHttpRequest object
+        const xhttp = new XMLHttpRequest();
+
+        // Define a callback function
+        xhttp.onload = function() {
+            res = this.getAllResponseHeaders();
+            // updateRating(res.status)
+            alert(res.status)
+
+        }
+
+        // Send a request
+        xhttp.open("GET", "http://127.0.0.1:5000/getRating?review=" + review);
+        var sent = xhttp.send();
+        if(sent){
+            alert("Sent");
+        }
 
     });
 
