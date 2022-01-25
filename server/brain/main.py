@@ -5,6 +5,7 @@ from textblob import TextBlob
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 # import tensorflow
 # from tensorflow.python.keras import models, layers, optimizers
 # from tensorflow.keras.preprocessing import Tokenizer, text_to_word_sequence
@@ -13,7 +14,6 @@ from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-
 
 # nltk.download('punkt')
 
@@ -54,14 +54,14 @@ def process_texts(texts):
   for text in texts:
     lower = text.lower()
     no_punctn = non_alphanum.sub(r' ', lower)
-    no_non_ascii = non_ascii.sub(r'', no_punctn)
+    no_non_ascii = non_ascii.sub(r' ', no_punctn)
     normal_texts.append(no_non_ascii)
   return normal_texts
 
 train_texts = process_texts(train_texts)
 test_texts = process_texts(test_texts)
 
-# print(train_texts[0])
+print(test_texts[0])
 
 # convert the data in countable vector form
 
@@ -70,7 +70,7 @@ cvec.fit(train_texts)
 X = cvec.transform(train_texts)
 X_test = cvec.transform(test_texts)
 
-# print(X_test)
+print(X_test[0])
 
 # splitting the training and testing values
 
@@ -79,8 +79,14 @@ X_train, X_val, Y_train, Y_val = train_test_split(X, train_labels, train_size = 
 # training the data using LogisticRegression (Will use Neural Networks Later)
 
 for c in [0.01, 0.05, 0.25, 0.5, 1]:
-  LR = LogisticRegression(C=c)
-  LR.fit(X_train, Y_train)
-  print("Accuracy for C=%s: %s" % (c, accuracy_score(Y_val, LR.predict(X_val))))
+  model = LogisticRegression(C=c)
+  model.fit(X_train, Y_train)
+  print("Accuracy for C=%s: %s" % (c, accuracy_score(Y_val, model.predict(X_val))))
+  pickle.dump(model, open('predicto1.model', 'wb'))
 
-print(LR.predict(X_test[1]))
+# load the model from disk
+model = pickle.load(open('predicto1.model', 'rb'))
+print(X_test[0])
+result = model.predict(X_test[0])
+print(result)
+# print(LR.predict(X_test[1]))
