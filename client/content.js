@@ -27,6 +27,8 @@ window.addEventListener('DOMFocusIn', function () {
         // if (review.includes('cool')) updateRating(3);
         // if (review.includes('nice')) updateRating(2);
         // if (review.includes('bad')) updateRating(1);
+
+        // ====================
         // Create an XMLHttpRequest object
         const xhttp = new XMLHttpRequest();
 
@@ -44,6 +46,7 @@ window.addEventListener('DOMFocusIn', function () {
         if(sent){
             alert("Sent");
         }
+        // ==================
 
     });
 
